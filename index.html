@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Kale 3D</title>
+</head>
+<body>
+    <header>
+        <h1>Kale 3D</h1>
+        <img src="img/kale_3d_logo.jpg" alt="kale_3d_logo">
+      </header>
+  
+    <nav>
+        <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Productos</a></li>
+        <li><a href="#">Nuestro equipo</a></li>
+        <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section>
+            <h2>Nuestros productos</h2>
+                <h3>Lampara Lunar</h3>
+                    <img src="lampara_luna.jpg" alt="lampara_luna">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
+                    <h3> Precio: $5000 </h3>
+                <button onclick="agregarAlCarrito()">Agregar al carrito :)</button>
+                <hr>
+                <h3>Mate Honda</h3>
+                    <img src="mate_honda.jpg" alt="mateHonda">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
+                    <h3> Precio: $1800 </h3>
+                <button value="mateHonda" id="mateHonda" onclick="agregarAlCarrito(1)">Agregar al carrito :)</button>
+                <hr>
+                <h3>Mate de la Snicth de Harry Potter</h3>
+                    <img src="mate_snitch.jpg" alt="mateSnitch">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
+                    <h3> Precio: $2200 </h3>
+                <button value="mateSnitch" id="mateSnitch" onclick="agregarAlCarrito(2)">Agregar al carrito :)</button>
+                <hr>
+        </section>
+        <div>
+            <h2>Carrito:</h2>
+            <p id="carrito"></p>
+
+            <p id="costoEnvio"> </p>
+            <span > Seleccione un destino: </span>
+            <select name="envio" id="envio" onchange="calcularEnvio()"> 
+                <option value="" selected >Destinos:</option>
+                <option value="centro"> Zona centro </option>
+                <option value="kuanip"> Zona Kuanip </option>
+                <option value="640"> Zona 640 </option>
+                <!-- <option value="ush-centro"> Zona Andorra </option>
+                    <option value="ush-centro"> Zona barrio Pipo </option>
+                    <option value="ush-centro"> Zona Ecologico</option>
+                    <option value="ush-centro"> Zona barrio Escondido </option>
+                    <option value="ush-centro"> Zona Alem al fondo </option>
+                    <option value="ush-centro"> Zona Los Morros</option>
+                    <option value="ush-centro"> Zona Malvinas</option>
+                    <option value="ush-centro"> Tolhuin</option>
+                    <option value="ush-centro"> Rio Grande</option> -->
+                </select>
+                <p id="precioFinal"></p>
+                <label >Metodo de pago:</label>
+                <select name="tipoPago" id="tipoPago" onchange="calcularPrecioTotal()">
+                    <option value="">----</option>
+                    <option value="efectivo">Efectivo</option>
+                        <option value="tarjeta">Tarjeta</option>
+                    </select>
+        </div>
+    </main>
+    <footer>
+        <h5> Copyright 2022 © Kale 3D todos los derechos reservados </h5>
+    </footer>
+    <script src="./index.js"></script>
+</body>
+</html>
