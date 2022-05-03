@@ -29,7 +29,7 @@
                     <img src="lampara_luna.jpg" alt="lampara_luna">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
                     <h3> Precio: $5000 </h3>
-                <button onclick="agregarAlCarrito()">Agregar al carrito :)</button>
+                <button onclick="agregarAlCarrito(0)" name="lamparaLuna" id="lamparaLuna">Agregar al carrito :)</button>
                 <hr>
                 <h3>Mate Honda</h3>
                     <img src="mate_honda.jpg" alt="mateHonda">
@@ -46,7 +46,7 @@
         </section>
         <div>
             <h2>Carrito:</h2>
-            <p id="carrito"></p>
+            <h3 id="carrito"></h3>
 
             <p id="costoEnvio"> </p>
             <span > Seleccione un destino: </span>
@@ -65,13 +65,19 @@
                     <option value="ush-centro"> Tolhuin</option>
                     <option value="ush-centro"> Rio Grande</option> -->
                 </select>
-                <p id="precioFinal"></p>
-                <label >Metodo de pago:</label>
+                <br> <br>
+                <label >*Metodo de pago:</label>
                 <select name="tipoPago" id="tipoPago" onchange="calcularPrecioTotal()">
                     <option value="">----</option>
-                    <option value="efectivo">Efectivo</option>
-                        <option value="tarjeta">Tarjeta</option>
-                    </select>
+                    <option value="efectivo">Efectivo </option>
+                    <option value="tarjeta">Tarjeta </option>
+                </select>
+                <h4 id="precioFinal"></h4>
+                
+                <br> <br>
+                <hr >
+                <p>*Pago en efectivo -%5 de descuento</p>
+                <p>*Pago en tarjeta +%10 de descuento</p>
         </div>
     </main>
     <footer>

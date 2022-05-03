@@ -1,4 +1,5 @@
 
+
 const productos =[
     {
         id: 0,
@@ -22,51 +23,67 @@ const productos =[
 
     }
 ]
+let compra = " "
 const carrito = []
-
-// function agregarAlCarrito(id) {
-    //     let producto = this.productos[id]
-    //     console.log(producto);
-    //     this.carrito.push(producto)
-    //     console.log(carrito);
-    // }
-// let robot = prompt("Ingrese la palabra 'papaya' para verificar que no es un robot");
-// while (robot != "papaya"){
-    //     robot = prompt("Ingrese la palabra 'papaya' para verificar que no es un robot");
-// }
+let precioEnvio = 0
 
 function calcularEnvio() {
     let lugar = document.getElementById("envio").value;
     console.log(lugar);
     if (lugar == "640"){
-        let precio = "$350"
-        document.getElementById("costoEnvio").innerHTML = `Costo de envio:  ${precio}`;
+        let precio = 350
+        precioEnvio = precio
+        document.getElementById("costoEnvio").innerHTML = `Costo de envio:  $${precio}`;
     }else if (lugar == "centro"){
-        let precio = "$200"
-        document.getElementById("costoEnvio").innerHTML = `Costo de envio:  ${precio}`;
+        let precio = 200
+        precioEnvio = precio
+        document.getElementById("costoEnvio").innerHTML = `Costo de envio:  $${precio}`;
     }else if (lugar == "kuanip"){
-        let precio = "$150"
-        document.getElementById("costoEnvio").innerHTML = `Costo de envio:  ${precio}`;
+        let precio = 150
+        precioEnvio = precio
+        document.getElementById("costoEnvio").innerHTML = `Costo de envio:  $${precio}`;
     }else{
-        let precio = "Zona no valida"
-        document.getElementById("costoEnvio").innerHTML = `Costo de envio:  ${precio}`;
+        let precio = "Zona no válida."
+        document.getElementById("costoEnvio").innerHTML = precio;
     }
+    
   }
 
 function calcularPrecioTotal(){
+    let precioTotal
+    let suma = 0 + precioEnvio
     let pago = document.getElementById("tipoPago").value;
     if (pago == "efectivo"){
-        let precioTotal = 5000 - (5000  * 0.05)
-        document.getElementById("precioFinal").innerHTML = `Precio de final:  $${precioTotal}`;
+        carrito.map(e => {
+            let precio = e.precio
+            let descuento = precio - (precio  * 0.05);
+            suma = suma + descuento;
+        })
+        precioTotal = '<p>'+'El precio final es: $'+ suma +'</p>';
     }else if (pago == "tarjeta"){
-        let precioTotal = 5000 + (5000  * 0.10)
-        document.getElementById("precioFinal").innerHTML = `Precio de final:  $${precioTotal}`;
+        carrito.map(e => {
+            let precio = e.precio
+            let descuento = precio + (precio  * 0.10);
+            suma = suma + descuento;
+            console.log(suma);
+        })
+        precioTotal = '<p>'+'El precio final es: $'+ suma +'</p>';
     }else{
-        let precioTotal = "Tipo de pago no valido"
-        document.getElementById("precioFinal").innerHTML = `Precio de final:  ${precioTotal}`;
+        precioTotal = '<p>'+'Ingrese un tipo de pago válido.'+'</p>';
     }
+    document.getElementById("precioFinal").innerHTML = precioTotal;
+
 }
 
-function agregarAlCarrito() {
-    console.log("Se acciono");
+function agregarAlCarrito(i) {
+    let producto = productos[i] 
+    carrito.push(producto);
+    console.log(carrito);
+    let total = carrito.map(e => {
+        return '<p>'+e.nombre +' $'+e.precio+'</p>'
+    });
+    compra = total.join("")
+    console.log(total, "total" );
+    document.getElementById("carrito").innerHTML = compra;
+    
 }
