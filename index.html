@@ -25,24 +25,9 @@
     <main>
         <section>
             <h2>Nuestros productos</h2>
-                <h3>Lampara Lunar</h3>
-                    <img src="lampara_luna.jpg" alt="lampara_luna">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
-                    <h3> Precio: $5000 </h3>
-                <button onclick="agregarAlCarrito(0)" name="lamparaLuna" id="lamparaLuna">Agregar al carrito :)</button>
-                <hr>
-                <h3>Mate Honda</h3>
-                    <img src="mate_honda.jpg" alt="mateHonda">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
-                    <h3> Precio: $1800 </h3>
-                <button value="mateHonda" id="mateHonda" onclick="agregarAlCarrito(1)">Agregar al carrito :)</button>
-                <hr>
-                <h3>Mate de la Snicth de Harry Potter</h3>
-                    <img src="mate_snitch.jpg" alt="mateSnitch">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
-                    <h3> Precio: $2200 </h3>
-                <button value="mateSnitch" id="mateSnitch" onclick="agregarAlCarrito(2)">Agregar al carrito :)</button>
-                <hr>
+            <div id="productos">
+                <!-- Aca se renderizan los productos -->
+            </div>
         </section>
         <div>
             <h2>Carrito:</h2>
@@ -51,19 +36,8 @@
             <p id="costoEnvio"> </p>
             <span > Seleccione un destino: </span>
             <select name="envio" id="envio" onchange="calcularEnvio()"> 
-                <option value="" selected >Destinos:</option>
-                <option value="centro"> Zona centro </option>
-                <option value="kuanip"> Zona Kuanip </option>
-                <option value="640"> Zona 640 </option>
-                <!-- <option value="ush-centro"> Zona Andorra </option>
-                    <option value="ush-centro"> Zona barrio Pipo </option>
-                    <option value="ush-centro"> Zona Ecologico</option>
-                    <option value="ush-centro"> Zona barrio Escondido </option>
-                    <option value="ush-centro"> Zona Alem al fondo </option>
-                    <option value="ush-centro"> Zona Los Morros</option>
-                    <option value="ush-centro"> Zona Malvinas</option>
-                    <option value="ush-centro"> Tolhuin</option>
-                    <option value="ush-centro"> Rio Grande</option> -->
+                    <option value="" selected >Destinos:</option>
+                    <!-- Aca se generan las opciones -->
                 </select>
                 <br> <br>
                 <label >*Metodo de pago:</label>
@@ -76,8 +50,8 @@
                 
                 <br> <br>
                 <hr >
-                <p>*Pago en efectivo -%5 de descuento</p>
-                <p>*Pago en tarjeta +%10 de descuento</p>
+                <p>*Pago en efectivo -%5 de descuento sobre el/los productos</p>
+                <p>*Pago en tarjeta +%10 de descuento sobre el/los productos</p>
         </div>
     </main>
     <footer>
