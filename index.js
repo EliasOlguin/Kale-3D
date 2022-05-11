@@ -49,7 +49,7 @@ const zonasDeEnvio = [
     },
     {
         id: 2,
-        zona: "Zona Kuanip ",
+        zona: "Zona Kuanip",
         value: "kuanip",
         precio: 150
     },
@@ -118,9 +118,44 @@ const carrito = []
 // Variables globales
 let compra = " "
 let precioEnvio = 0
+let botonVaciar = '<button id="vacieCarrito" onclick="vaciarCarrito(),cambiarPrecio()">Vaciar carrito</button>';
 
 // fin var
 
+// Inicio
+let carro = JSON.parse(localStorage.getItem("carrito"))
+    if ( carro){
+        carro.map(e => { carrito.push(e) })
+        console.log(carrito);
+        let total = carrito.map(e => {
+            return '<p>' + e.nombre + ' $' + e.precio + '</p>'
+        });
+        compra = total.join("")
+        console.log(total, "total");
+        document.getElementById("carrito").innerHTML = compra;
+        document.getElementById("vaciarCarrito").innerHTML = botonVaciar;
+    }
+    
+    
+    // Productos
+    for (let producto of productos) {
+        let contenedor = document.createElement("div")
+        contenedor.innerHTML = `<h3>` + producto.nombre + `</h3>` +
+                                `<img src="` + producto.img + `" alt="` + producto.img + `">` +
+                                `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
+                                <h3> Precio: $`+ producto.precio + `</h3>
+                                <button onclick="agregarAlCarrito(`+ producto.id + `)" name="` + producto.name_id + `" id="` + producto.name_id + `">Agregar al carrito :)</button>
+                                <hr>`
+        document.getElementById("productos").append(contenedor)
+    }
+    // Envios
+    for (let zona of zonasDeEnvio) {
+        let contenedor = document.createElement("option")
+        contenedor.innerHTML = `<option value="` + zona.value + `"  >` + zona.zona + `</option>`
+        document.getElementById("envio").append(contenedor)
+    
+    
+    
 // Envio
 function calcularEnvio() {
     let lugar = document.getElementById("envio").value;
@@ -141,7 +176,7 @@ function calcularEnvio() {
         let precio = "Zona no válida."
         document.getElementById("costoEnvio").innerHTML = precio;
     }
-
+    
 }
 //   Precio
 
@@ -163,15 +198,24 @@ function calcularPrecioTotal() {
         precioTotal = 'El precio final es: $' + suma
         console.log(precioTotal);
     } else {
-        precioTotal = 'Ingrese un tipo de pago válido.'
+        precioTotal = ''
     }
     document.getElementById("precioFinal").innerHTML = precioTotal;
+}
+
+let cambio = document.getElementById("envio")
+cambio.addEventListener("click", calcularPrecioTotal)
+let agregoProducto = document.getElementById("productos")
+agregoProducto.addEventListener("click", calcularPrecioTotal)
+function cambiarPrecio() {
+    calcularPrecioTotal()
 }
 // Carrito
 
 function agregarAlCarrito(i) {
     let producto = productos[i]
     carrito.push(producto);
+    localStorage.setItem("carrito",JSON.stringify(carrito));
     console.log(carrito);
     let total = carrito.map(e => {
         return '<p>' + e.nombre + ' $' + e.precio + '</p>'
@@ -179,22 +223,17 @@ function agregarAlCarrito(i) {
     compra = total.join("")
     console.log(total, "total");
     document.getElementById("carrito").innerHTML = compra;
+    document.getElementById("vaciarCarrito").innerHTML = botonVaciar;
 
 }
-// Productos
-for (let producto of productos) {
-    let contenedor = document.createElement("div")
-    contenedor.innerHTML = `<h3>` + producto.nombre + `</h3>` +
-                            `<img src="` + producto.img + `" alt="` + producto.img + `">` +
-                            `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
-                            <h3> Precio: $`+ producto.precio + `</h3>
-                            <button onclick="agregarAlCarrito(`+ producto.id + `)" name="` + producto.name_id + `" id="` + producto.name_id + `">Agregar al carrito :)</button>
-                            <hr>`
-    document.getElementById("productos").append(contenedor)
+function vaciarCarrito(){
+    localStorage.removeItem("carrito");
+    for(let i = 0; i < carrito.length; i++){
+        i--
+        carrito.splice(i,1);
+        console.log("borre 1 vez");
+    }
+    console.log(carrito);
+    document.getElementById("carrito").innerHTML = "";
 }
-// Envios
-for (let zona of zonasDeEnvio) {
-    let contenedor = document.createElement("option")
-    contenedor.innerHTML = `<option value="` + zona.value + `"  >` + zona.zona + `</option>`
-    document.getElementById("envio").append(contenedor)
 }
