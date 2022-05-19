@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
     <title>Kale 3D</title>
 </head>
 <body >
     <header>
-        <h1>Kale 3D</h1>
-        <img src="img/kale_3d_logo.jpg" alt="kale_3d_logo">
+        <h1 href="index.html">Kale 3D</h1>
       </header>
   
-    <nav>
-        <ul>
-        <li><a href="#">Inicio</a></li>
+    <nav >
+        <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
         <li><a href="#">Productos</a></li>
         <li><a href="#">Nuestro equipo</a></li>
         <li><a href="#">Contacto</a></li>
@@ -24,41 +25,44 @@
     
     <main>
         <section>
-            <h2>Nuestros productos</h2>
-            <div id="productos">
+            <h2 class="productos-titulo">Nuestros productos</h2>
+            <div id="productos" class="productos m-3 ">
                 <!-- Aca se renderizan los productos -->
             </div>
         </section>
-        <div>
+        <div class="m-3">
             <h2>Carrito:</h2>
             <h3 id="carrito"></h3>
 
             <div id="vaciarCarrito">
 
             </div>
-            <p id="costoEnvio"> </p>
-            <span > Seleccione un destino: </span>
-            <select name="envio" id="envio" onchange="calcularEnvio()"> 
-                    <option value="" selected >Destinos:</option>
-                    <!-- Aca se generan las opciones -->
-                </select>
-                <br> <br>
-                <label >*Metodo de pago:</label>
-                <select name="tipoPago" id="tipoPago" onchange="calcularPrecioTotal()">
-                    <option value="">----</option>
-                    <option value="efectivo">Efectivo </option>
-                    <option value="tarjeta">Tarjeta </option>
-                </select>
-                <h4 id="precioFinal"></h4>
-                
-                <br> <br>
-                <hr >
-                <p>*Pago en efectivo -%5 de descuento sobre el/los productos</p>
-                <p>*Pago en tarjeta +%10 de descuento sobre el/los productos</p>
+            <div class="mt-5  opciones-compra">
+                <div class="opciones-compra-form">
+                    <span > Seleccione un destino: </span>
+                    <select class="form-select" name="envio" id="envio" onchange="calcularEnvio()"> 
+                        <option value="" selected >Destinos:</option>
+                        <!-- Aca se generan las opciones -->
+                    </select>
+                    <p id="costoEnvio"> </p>
+                </div>
+                <hr>
+                <div class="opciones-compra-form">
+                    <label >*Metodo de pago:</label>
+                    <select class="form-select" name="tipoPago" id="tipoPago" onchange="calcularPrecioTotal()">
+                        <option value="">----</option>
+                        <option value="efectivo">Efectivo </option>
+                        <option value="tarjeta">Tarjeta </option>
+                    </select>
+                    <h4 id="precioFinal"></h4>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
         <h5> Copyright 2022 © Kale 3D todos los derechos reservados </h5>
+        <p>*Pago en efectivo -%5 de descuento sobre el/los productos</p>
+        <p>*Pago en tarjeta +%10 de descuento sobre el/los productos</p>
     </footer>
     <script src="./index.js"></script>
 </body>

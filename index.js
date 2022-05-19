@@ -118,7 +118,7 @@ const carrito = []
 // Variables globales
 let compra = " "
 let precioEnvio = 0
-let botonVaciar = '<button id="vacieCarrito" onclick="vaciarCarrito(),cambiarPrecio()">Vaciar carrito</button>';
+let botonVaciar = '<div class="d-grid gap-2 d-md-flex justify-content-md-end"><button class="btn btn-warning" id="vacieCarrito" onclick="vaciarCarrito(),cambiarPrecio()">Vaciar carrito</button></div>';
 
 // fin var
 
@@ -128,7 +128,7 @@ let carro = JSON.parse(localStorage.getItem("carrito"))
         carro.map(e => { carrito.push(e) })
         console.log(carrito);
         let total = carrito.map(e => {
-            return '<p>' + e.nombre + ' $' + e.precio + '</p>'
+            return '<p class="carrito-producto">' + e.nombre + ' $' + e.precio + '</p>'
         });
         compra = total.join("")
         console.log(total, "total");
@@ -139,13 +139,15 @@ let carro = JSON.parse(localStorage.getItem("carrito"))
     
     // Productos
     for (let producto of productos) {
-        let contenedor = document.createElement("div")
+        let contenedor = document.createElement("span")
+        contenedor.className = "producto"
         contenedor.innerHTML = `<h3>` + producto.nombre + `</h3>` +
                                 `<img src="` + producto.img + `" alt="` + producto.img + `">` +
                                 `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
                                 <h3> Precio: $`+ producto.precio + `</h3>
-                                <button onclick="agregarAlCarrito(`+ producto.id + `)" name="` + producto.name_id + `" id="` + producto.name_id + `">Agregar al carrito :)</button>
-                                <hr>`
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button onclick="agregarAlCarrito(`+ producto.id + `)" name="` + producto.name_id + `" id="` + producto.name_id + `" class="btn btn-primary">Agregar al carrito :)</button>
+                                </div>`
         document.getElementById("productos").append(contenedor)
     }
     // Envios
@@ -218,7 +220,7 @@ function agregarAlCarrito(i) {
     localStorage.setItem("carrito",JSON.stringify(carrito));
     console.log(carrito);
     let total = carrito.map(e => {
-        return '<p>' + e.nombre + ' $' + e.precio + '</p>'
+        return '<p class="carrito-producto">' + e.nombre + ' $' + e.precio + '</p>'
     });
     compra = total.join("")
     console.log(total, "total");
