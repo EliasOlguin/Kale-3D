@@ -32,6 +32,14 @@ const productos = [
         precio: 5000,
         img: "lampara_saturno.jpg",
         disponible: true
+    },
+    {
+        id: 4,
+        nombre: "Llavero personalizado",
+        name_id: "llaveroPersonalizado",
+        precio: 0,
+        img: "llavero_personalizado.jpg",
+        disponible: true
     }
 ]
 const zonasDeEnvio = [
@@ -118,7 +126,7 @@ const carrito = []
 // Variables globales
 let compra = " "
 let precioEnvio = 0
-let botonVaciar = '<div class="d-grid gap-2 d-md-flex justify-content-md-end"><button class="btn btn-warning" id="vacieCarrito" onclick="vaciarCarrito(),cambiarPrecio()">Vaciar carrito</button></div>';
+let botonVaciar = '<div class="d-grid gap-2 d-md-flex justify-content-md-end"><button class="btn btn-carrito btn-warning" id="vacieCarrito" onclick="vaciarCarrito(),cambiarPrecio()">Vaciar carrito</button></div>';
 
 // fin var
 
@@ -128,7 +136,7 @@ let carro = JSON.parse(localStorage.getItem("carrito"))
         carro.map(e => { carrito.push(e) })
         console.log(carrito);
         let total = carrito.map(e => {
-            return '<p class="carrito-producto">' + e.nombre + ' $' + e.precio + '</p>'
+            return '<p class="carrito-producto">' + e.nombre + ' $' + e.precio + '<button class="btn btn-danger" onclick="eliminarDelCarrito('+ e.index +')">eliminar</button></p>'
         });
         compra = total.join("")
         console.log(total, "total");
@@ -214,19 +222,23 @@ function cambiarPrecio() {
 }
 // Carrito
 
+let contador = -1
+
 function agregarAlCarrito(i) {
+    contador++
     let producto = productos[i]
+    producto.index = contador
     carrito.push(producto);
     localStorage.setItem("carrito",JSON.stringify(carrito));
     console.log(carrito);
     let total = carrito.map(e => {
-        return '<p class="carrito-producto">' + e.nombre + ' $' + e.precio + '</p>'
+        return '<p class="carrito-producto">' + e.nombre + ' $' + e.precio +'<button class="btn btn-danger" onclick="eliminarDelCarrito('+ e.index +')">eliminar</button></p>'
     });
     compra = total.join("")
     console.log(total, "total");
     document.getElementById("carrito").innerHTML = compra;
     document.getElementById("vaciarCarrito").innerHTML = botonVaciar;
-
+    
 }
 function vaciarCarrito(){
     localStorage.removeItem("carrito");
@@ -237,5 +249,26 @@ function vaciarCarrito(){
     }
     console.log(carrito);
     document.getElementById("carrito").innerHTML = "";
+    document.getElementById("vacieCarrito").outerHTML = "";
+}
+let contador1 = -1
+function eliminarDelCarrito(id){
+    contador--
+    contador1++
+    console.log(id);
+    carrito.splice(id,1)
+    if (carrito){
+        let carritoSinP = carrito.map(e => {
+            e.index = contador1
+            return '<p class="carrito-producto">' + e.nombre + ' $' + e.precio +'<button class="btn btn-danger" onclick="eliminarDelCarrito('+e.index+')">eliminar</button></p>'
+        });
+        let carritoFilter = carritoSinP.join("")
+        document.getElementById("carrito").innerHTML = carritoFilter;
+        document.getElementById("vaciarCarrito").innerHTML = botonVaciar;
+    }else{
+        document.getElementById("carrito").innerHTML = "";
+        document.getElementById("vacieCarrito").outerHTML = "";
+    }
+
 }
 }

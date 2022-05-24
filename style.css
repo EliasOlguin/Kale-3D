@@ -34,9 +34,8 @@ header h1{
 
 }
 .productos{
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
 }
 .producto{
     background-color: #FFF;
@@ -46,17 +45,23 @@ header h1{
     color: #333;
     margin: 5px;
     padding: 15px;
+    width: 49%;
 }
 /* Carrito */
 .carrito-producto{
     background-color: #FFF;
     box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+    border-radius: 10px;
+    display: flex;
     font-size: 20px;
+    justify-content:space-between;
     margin: 15px;
     padding: 10px;
-    max-width:max-content;
+    /* max-width:max-content; */
     padding-left: 20px;
-    border-radius: 10px;
+}
+.btn-carrito{
+    margin-right: 1rem;
 }
 .opciones-compra{
     border-radius: 5px;
@@ -73,4 +78,10 @@ header h1{
 }
 .opciones-compra-form select{
     max-width: max-content;
+}
+
+/* Footer */
+footer h5{
+    display: flex;
+    justify-content: center;
 }
