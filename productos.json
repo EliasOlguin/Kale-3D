@@ -1,0 +1,8 @@
+[
+    {"id":0,"nombre":"Lampara Luna","precio":5000,"descripcion":"lamparaluna","img":"lampara_luna.jpg","disponible":true},
+    {"id":1,"nombre":"Mate de Honda","precio":1800,"descripcion":"mateHonda","img":"mate_honda.jpg","disponible":true},
+    {"id":2,"nombre":"Mate de la Snicth de Harry Potter","precio":2200,"descripcion":"mateSnicth","img":"mate_snitch.jpg","disponible":true},
+    {"id":3,"nombre":"Lampara Saturno","precio":5000,"descripcion":"lamparaSaturno","img":"lampara_saturno.jpg","disponible":true},
+    {"id":4,"nombre":"Llavero personalizado","precio":500,"descripcion":"llaveroPersonalizado","img":"llavero_personalizado.jpg","disponible":true},
+    {"id":5,"nombre":"Llavero de la princesa", "precio":500, "descripcion":"Llavero de la princesa", "img":"llavero_princesa.jpg","disponible":true}
+]

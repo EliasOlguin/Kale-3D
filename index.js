@@ -45,11 +45,30 @@ zonaDeEnvio.push(new ZonaDeEnvio(11,"Tolhuin","tolhuin",0))
 zonaDeEnvio.push(new ZonaDeEnvio(11,"Rio Grande","rioGrande",0))
 
 // Variables globales
+let fraseCelebre = ""
 let compra = " "
 let precioEnvio = 0
 let botonVaciar = `<div class="d-grid gap-2 d-md-flex justify-content-md-end"><button class="btn btn-carrito btn-warning" id="vacieCarrito" onclick="vaciarCarrito(),cambiarPrecio()">Vaciar carrito</button></div>`;
 
 // fin var
+// Peticiones
+// fetch("./productos.json")
+// .then(response => response.json())
+// .then(data => {
+//     productos.push(data)
+//     console.log(productos);
+//     console.log(data);
+// })
+
+fetch("https://ricardofort.herokuapp.com")
+.then(response => response.json())
+.then(data => { 
+    fraseCelebre = data.frase + " By el comandante"
+    console.log(data);
+    document.getElementById("comandante").innerHTML = fraseCelebre;
+})
+.catch(e => console.log(e))
+
 
 // Inicio
     
@@ -205,13 +224,19 @@ function eliminarDelCarrito(id){
             carrito.splice(id,1);
             localStorage.setItem("carrito",JSON.stringify(carrito));
             console.log(carrito);
-            let total = carrito.map(e => {
-                return `<p class="carrito-producto"> ${e.nombre} $${e.precio}<button class="btn btn-danger" onclick="eliminarDelCarrito(${e.index})">eliminar</button></p>`
+            let total = carrito.map((e,index) => {
+                return `<p class="carrito-producto"> ${e.nombre} $${e.precio}<button class="btn btn-danger" onclick="eliminarDelCarrito(${index})">eliminar</button></p>`
             });
             compra = total.join("")
             console.log(total, "total");
-            document.getElementById("carrito").innerHTML = compra;
-            document.getElementById("vaciarCarrito").innerHTML = botonVaciar;
+            if(carrito.length != 0){
+                document.getElementById("carrito").innerHTML = compra;
+                document.getElementById("vaciarCarrito").innerHTML = botonVaciar;
+            }else{
+                document.getElementById("carrito").innerHTML = "";
+                document.getElementById("vaciarCarrito").innerHTML = "";
+
+            }
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',

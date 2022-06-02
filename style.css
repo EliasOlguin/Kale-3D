@@ -88,3 +88,8 @@ footer h5{
     display: flex;
     justify-content: center;
 }
+footer h4{
+    font-size: 20px;
+    text-align: center;
+    text-transform: lowercase;
+}
