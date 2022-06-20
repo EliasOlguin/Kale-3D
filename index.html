@@ -12,7 +12,8 @@
 </head>
 <body >
     <header>
-        <h1 href="index.html">Kale 3D</h1>
+        <img src="assets/kale3dlogo.jpg" alt="logoKale3d">
+        <h1 href="index.html">Kale 3D - Impresiones y diseños en 3D</h1>
       </header>
   
     <nav >
@@ -41,8 +42,8 @@
             <div class="mt-5  opciones-compra">
                 <div class="opciones-compra-form">
                     <span > Seleccione un destino: </span>
-                    <select class="form-select" name="envio" id="envio" onchange="calcularEnvio()"> 
-                        <option value="" selected >Destinos:</option>
+                    <select class="form-select" name="envio" id="envio" onchange="calcularEnvio(), calcularPrecioTotal()"> 
+                        <option value="" selected  >Destinos:</option>
                         <!-- Aca se generan las opciones -->
                     </select>
                     <p id="costoEnvio"> </p>
@@ -64,7 +65,6 @@
         <h5> Copyright 2022 © Kale 3D todos los derechos reservados </h5>
         <p>*Pago en efectivo -%5 de descuento sobre el/los productos</p>
         <p>*Pago en tarjeta +%10 de descuento sobre el/los productos</p>
-        <h4 id="comandante"></h4>
     </footer>
     <script src="./index.js"></script>
 </body>

@@ -1,3 +1,7 @@
+// Arrays
+const productos = []
+const zonaDeEnvio = []
+const carrito = []
 // Interfaces
 class Productos {
   constructor(id, nombre, precio, descripcion, imagen,disponible) {
@@ -18,17 +22,12 @@ class ZonaDeEnvio {
     }
 }
 
-// Arrays
-const productos = []
-const zonaDeEnvio = []
-const carrito = []
 // Insertar productos
-productos.push(new Productos (0,"Lampara Luna",5000,"lamparaluna","lampara_luna.jpg",true))
-productos.push(new Productos (1,"Mate de Honda",1800,"mateHonda","mate_honda.jpg",true))
-productos.push(new Productos (2,"Mate de la Snicth de Harry Potter",2200,"mateSnicth","mate_snitch.jpg",true))
-productos.push(new Productos (3,"Lampara Saturno",5000,"lamparaSaturno","lampara_saturno.jpg",true))
-productos.push(new Productos (4,"Llavero personalizado",500,"llaveroPersonalizado","llavero_personalizado.jpg",true))
-productos.push(new Productos (5,"Llavero de la princesa", 500, "Llavero de la princesa", "llavero_princesa.jpg",true));
+productos.push(new Productos (0,"Lampara Luna",5000,"lamparaluna","lamparaLuna.png",true))
+productos.push(new Productos (1,"Mate de Honda",1800,"mateHonda","mateHonda.jpg",true))
+productos.push(new Productos (2,"Figura baby Yoda",1800,"mateSnicth","figuraYoda.jpg",true))
+productos.push(new Productos (3,"Lampara Saturno",5000,"lamparaSaturno","lamparaSaturno.png",true))
+productos.push(new Productos (4,"Llavero personalizado",500,"llaveroPersonalizado","llaveroJason.jpg",true))
 // Insertar zonas de envio
 zonaDeEnvio.push(new ZonaDeEnvio(0,"Retiro en el local","retiro",0))
 zonaDeEnvio.push(new ZonaDeEnvio(1,"Zona centro","centro",200))
@@ -45,30 +44,11 @@ zonaDeEnvio.push(new ZonaDeEnvio(11,"Tolhuin","tolhuin",0))
 zonaDeEnvio.push(new ZonaDeEnvio(11,"Rio Grande","rioGrande",0))
 
 // Variables globales
-let fraseCelebre = ""
 let compra = " "
 let precioEnvio = 0
 let botonVaciar = `<div class="d-grid gap-2 d-md-flex justify-content-md-end"><button class="btn btn-carrito btn-warning" id="vacieCarrito" onclick="vaciarCarrito(),cambiarPrecio()">Vaciar carrito</button></div>`;
 
 // fin var
-// Peticiones
-// fetch("./productos.json")
-// .then(response => response.json())
-// .then(data => {
-//     productos.push(data)
-//     console.log(productos);
-//     console.log(data);
-// })
-
-fetch("https://ricardofort.herokuapp.com")
-.then(response => response.json())
-.then(data => { 
-    fraseCelebre = data.frase + " By el comandante"
-    console.log(data);
-    document.getElementById("comandante").innerHTML = fraseCelebre;
-})
-.catch(e => console.log(e))
-
 
 // Inicio
     
@@ -91,13 +71,14 @@ fetch("https://ricardofort.herokuapp.com")
     for (let producto of productos) {
         let contenedor = document.createElement("span")
         contenedor.className = "producto"
-        contenedor.innerHTML = `<h3> ${producto.nombre}</h3>
-        <img src="${producto.img}" alt="${producto.descripcion}">
+        contenedor.innerHTML = `<div class="contenedor-productos"> <div class="col-6 contenedor-productos2"><img src="assets/${producto.img}" alt="${producto.descripcion}"></div>
+        <div class="col-6 contenedor-productos2"> <h3> ${producto.nombre}</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
-        <h3> Precio: $${producto.precio}</h3>
+        <h4> Precio: $${producto.precio}</h4>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button onclick="agregarAlCarrito(${producto.id})" id="${producto.id} " class="btn btn-primary">Agregar al carrito :)</button>
-        </div>`
+        <button onclick="agregarAlCarrito(${producto.id})" id="${producto.id} " class="btn btn-primary" style="margin: auto;">Agregar al carrito :)</button>
+        </div>
+        </div></div>`
         document.getElementById("productos").append(contenedor)
     }
     // Envios
@@ -164,6 +145,8 @@ borroProducto.addEventListener("click", calcularPrecioTotal)
 function cambiarPrecio() {
     calcularPrecioTotal()
 }
+// Fin inicio
+
 // Carrito
 
 function  agregarAlCarrito(id) {
@@ -210,6 +193,7 @@ function vaciarCarrito(){
             console.log(carrito);
             document.getElementById("carrito").innerHTML = "";
             document.getElementById("vacieCarrito").outerHTML = "";
+            calcularPrecioTotal()
         }})
         }
 
@@ -224,19 +208,19 @@ function eliminarDelCarrito(id){
             carrito.splice(id,1);
             localStorage.setItem("carrito",JSON.stringify(carrito));
             console.log(carrito);
-            let total = carrito.map((e,index) => {
-                return `<p class="carrito-producto"> ${e.nombre} $${e.precio}<button class="btn btn-danger" onclick="eliminarDelCarrito(${index})">eliminar</button></p>`
+            let total = carrito.map(e => {
+                return `<p class="carrito-producto"> ${e.nombre} $${e.precio}<button class="btn btn-danger" onclick="eliminarDelCarrito(${e.index})">eliminar</button></p>`
             });
             compra = total.join("")
             console.log(total, "total");
-            if(carrito.length != 0){
+            if ( carrito.length !=0){
                 document.getElementById("carrito").innerHTML = compra;
                 document.getElementById("vaciarCarrito").innerHTML = botonVaciar;
             }else{
-                document.getElementById("carrito").innerHTML = "";
+                document.getElementById("carrito").innerHTML = compra;
                 document.getElementById("vaciarCarrito").innerHTML = "";
-
             }
+            calcularPrecioTotal()
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
