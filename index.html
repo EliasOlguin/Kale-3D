@@ -41,22 +41,27 @@
             </div>
             <div class="mt-5  opciones-compra">
                 <div class="opciones-compra-form">
-                    <span > Seleccione un destino: </span>
-                    <select class="form-select" name="envio" id="envio" onchange="calcularEnvio(), calcularPrecioTotal()"> 
-                        <option value="" selected  >Destinos:</option>
-                        <!-- Aca se generan las opciones -->
-                    </select>
+                    <div class="opciones-compra-form-pago">
+                        <span > Seleccione un destino: </span>
+                        <select class="form-select" name="envio" id="envio" onchange="calcularEnvio(), calcularPrecioTotal()" style="margin-left:15px;"> 
+                            <option value="" selected  >Destinos:</option>
+                            <!-- Aca se generan las opciones -->
+                        </select>
+                    </div>
                     <p id="costoEnvio"> </p>
                 </div>
                 <hr>
                 <div class="opciones-compra-form">
-                    <label >*Metodo de pago:</label>
-                    <select class="form-select" name="tipoPago" id="tipoPago" onchange="calcularPrecioTotal()">
-                        <option value="">----</option>
-                        <option value="efectivo">Efectivo </option>
-                        <option value="tarjeta">Tarjeta </option>
-                    </select>
-                    <h4 id="precioFinal"></h4>
+                    <div class="opciones-compra-form-pago">
+                        <label >*Metodo de pago:</label>
+                        <select class="form-select" style="margin-left:10px ;" name="tipoPago" id="tipoPago" onchange="calcularPrecioTotal()">
+                            <option value="">----</option>
+                            <option value="efectivo">Efectivo </option>
+                            <option value="tarjeta">Tarjeta </option>
+                        </select>
+                    </div>
+                    <h4 id="precioFinal"></h4> 
+                    <button class="btn btn-success" style="margin-right:15px;" onclick="finalizarCompra()"> Finalizar compra</button>
                 </div>
             </div>
         </div>

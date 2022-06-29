@@ -1,0 +1,15 @@
+[
+    {"id":0,"zona":"Retiro en el local","value":"retiro","precio":0},
+    {"id":1,"zona":"Zona centro","value":"centro","precio":200},
+    {"id":2,"zona":"Zona Kuanip","value":"kuanip","precio":150},
+    {"id":3,"zona":"Zona 640","value":"640","precio":350},
+    {"id":4,"zona":"Zona Andorra","value":"andorra","precio":350},
+    {"id":5,"zona":"Zona barrio Pipo","value":"pipo","precio":200},
+    {"id":6,"zona":"Zona Ecologico","value":"ecologico","precio":200},
+    {"id":7,"zona":"Zona Alem al fondo","value":"alemFondo","precio":200},
+    {"id":8,"zona":"Zona barrio Escondido","value":"escondido","precio":200},
+    {"id":9,"zona":"Zona Los Morros","value":"morros","precio":250},
+    {"id":10,"zona":"Zona Malvinas","value":"malvinas","precio":150},
+    {"id":11,"zona":"Tolhuin","value":"tolhuin","precio":0},
+    {"id":11,"zona":"Rio Grande","value":"rioGrande","precio":0}
+]

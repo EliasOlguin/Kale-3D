@@ -2,57 +2,17 @@
 const productos = []
 const zonaDeEnvio = []
 const carrito = []
-// Interfaces
-class Productos {
-  constructor(id, nombre, precio, descripcion, imagen,disponible) {
-    this.id = id;
-    this.nombre = nombre;
-    this.precio = precio;
-    this.descripcion = descripcion;
-    this.img = imagen;
-    this.disponible = disponible
-  }
-}
-class ZonaDeEnvio {
-    constructor(id,zona,value,precio){
-        this.id = id;
-        this.zona = zona;
-        this.value = value;
-        this.precio = precio;
-    }
-}
-
-// Insertar productos
-productos.push(new Productos (0,"Lampara Luna",5000,"lamparaluna","lamparaLuna.png",true))
-productos.push(new Productos (1,"Mate de Honda",1800,"mateHonda","mateHonda.jpg",true))
-productos.push(new Productos (2,"Figura baby Yoda",1800,"mateSnicth","figuraYoda.jpg",true))
-productos.push(new Productos (3,"Lampara Saturno",5000,"lamparaSaturno","lamparaSaturno.png",true))
-productos.push(new Productos (4,"Llavero personalizado",500,"llaveroPersonalizado","llaveroJason.jpg",true))
-// Insertar zonas de envio
-zonaDeEnvio.push(new ZonaDeEnvio(0,"Retiro en el local","retiro",0))
-zonaDeEnvio.push(new ZonaDeEnvio(1,"Zona centro","centro",200))
-zonaDeEnvio.push(new ZonaDeEnvio(2,"Zona Kuanip","kuanip",150))
-zonaDeEnvio.push(new ZonaDeEnvio(3,"Zona 640","640",350))
-zonaDeEnvio.push(new ZonaDeEnvio(4,"Zona Andorra","andorra",350))
-zonaDeEnvio.push(new ZonaDeEnvio(5,"Zona barrio Pipo","pipo",200))
-zonaDeEnvio.push(new ZonaDeEnvio(6,"Zona Ecologico","ecologico",200))
-zonaDeEnvio.push(new ZonaDeEnvio(7,"Zona Alem al fondo","alemFondo",200))
-zonaDeEnvio.push(new ZonaDeEnvio(8,"Zona barrio Escondido","escondido",200))
-zonaDeEnvio.push(new ZonaDeEnvio(9,"Zona Los Morros","morros",250))
-zonaDeEnvio.push(new ZonaDeEnvio(10,"Zona Malvinas","malvinas",150))
-zonaDeEnvio.push(new ZonaDeEnvio(11,"Tolhuin","tolhuin",0))
-zonaDeEnvio.push(new ZonaDeEnvio(11,"Rio Grande","rioGrande",0))
-
 // Variables globales
 let compra = " "
 let precioEnvio = 0
 let botonVaciar = `<div class="d-grid gap-2 d-md-flex justify-content-md-end"><button class="btn btn-carrito btn-warning" id="vacieCarrito" onclick="vaciarCarrito(),cambiarPrecio()">Vaciar carrito</button></div>`;
-
 // fin var
 
 // Inicio
+
     
     // Carrito
+   
     let carro = JSON.parse(localStorage.getItem("carrito"))
     if ( carro){
         carro.map(e => { carrito.push(e) })
@@ -68,25 +28,56 @@ let botonVaciar = `<div class="d-grid gap-2 d-md-flex justify-content-md-end"><b
     
     
     // Productos
-    for (let producto of productos) {
-        let contenedor = document.createElement("span")
-        contenedor.className = "producto"
-        contenedor.innerHTML = `<div class="contenedor-productos"> <div class="col-6 contenedor-productos2"><img src="assets/${producto.img}" alt="${producto.descripcion}"></div>
-        <div class="col-6 contenedor-productos2"> <h3> ${producto.nombre}</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
+    async function getProductos(){
+        await fetch("./productos.json")
+        .then(response=>{
+            return response.json();
+        })
+        .then(jsondata =>
+            jsondata.forEach( p =>{
+                productos.push(p)
+            })
+            );
+        console.log(productos);
+        for (let i = 0; i < productos.length; i++) {
+            const producto = productos[i];
+            console.log(producto);
+            let contenedor = document.createElement("span")
+            contenedor.className = "producto"
+            contenedor.innerHTML = `<div class="contenedor-productos"> <div class="col-6 contenedor-productos2"><img src="assets/${producto.img}" alt="${producto.descripcion}"></div>
+            <div class="col-6 contenedor-productos2"> <h3> ${producto.nombre}</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quaerat nihil doloribus pariatur amet optio aut rem enim ad ipsum ducimus sit adipisci, quae molestiae, provident suscipit, mollitia repellat harum!</p>
         <h4> Precio: $${producto.precio}</h4>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button onclick="agregarAlCarrito(${producto.id})" id="${producto.id} " class="btn btn-primary" style="margin: auto;">Agregar al carrito :)</button>
         </div>
         </div></div>`
         document.getElementById("productos").append(contenedor)
+        }
     }
+    console.log(productos);
+    getProductos()
     // Envios
-    for (let zona of zonaDeEnvio) {
-        let contenedor = document.createElement("option")
-        contenedor.innerHTML = `<option value="${zona.value}"  >${zona.zona}</option>`
-        document.getElementById("envio").append(contenedor)
+    async function getZonaDeEnvios(){
+        await fetch("./zonaDeEnvio.json")
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            data.forEach(z=>{
+                zonaDeEnvio.push(z)
+            })
+        })
+        console.log(zonaDeEnvio);
+        for (let i = 0; i < zonaDeEnvio.length; i++) {
+            const zona = zonaDeEnvio[i];
+            let contenedor = document.createElement("option")
+            contenedor.innerHTML = `<option value="${zona.value}"  >${zona.zona}</option>`
+            document.getElementById("envio").append(contenedor)
+            
+        }
     }
+    getZonaDeEnvios()
         
         
         // Envio
@@ -107,6 +98,7 @@ let botonVaciar = `<div class="d-grid gap-2 d-md-flex justify-content-md-end"><b
                 document.getElementById("costoEnvio").innerHTML = `Costo de envio:  $${zona.precio}`;
             } else {
                 let precio = "Zona no válida."
+                precioEnvio = 0
                 document.getElementById("costoEnvio").innerHTML = precio;
             }
             
@@ -232,30 +224,35 @@ function eliminarDelCarrito(id){
         }
     })
 }
-    // console.log(id);
-    // carrito.splice(id,1)
-    // carrito.forEach((e,index)=>{
-    //     e.index = index
-    // })
-    // let carritoSinP = carrito.map(e => {
-    //     return `<p class="carrito-producto"> ${e.nombre} $${e.precio}<button class="btn btn-danger" onclick="eliminarDelCarrito(${e.index})">eliminar</button></p>`
-    // });
-    // if (carrito && carrito.length >= 1){
-    //     let carritoFilter = carritoSinP.join("")
-    //     document.getElementById("carrito").innerHTML = carritoFilter;
-    //     document.getElementById("vaciarCarrito").innerHTML = botonVaciar;
-    // }else{
-    //     document.getElementById("carrito").innerHTML = "";
-    //     document.getElementById("vacieCarrito").outerHTML = "";
-    // }
-    // }
-
-// Escuchar los clicks
-// for (let producto of productos){
-//     console.log("Escuche", producto.descripcion); 
-//     const agregar = document.getElementById(producto.descripcion)
-//         agregar.addEventListener("click",agregarAlCarrito(producto.id))
-// }
+function finalizarCompra(){
+    Swal.fire({
+        title: 'Quieres finalizar y pagar la compra?',
+        icon: 'success',
+        showCancelButton: true,
+        showConfirmButton: 'Si, comprar!'
+    }).then((result) => {
+        if(result.value){
+            localStorage.removeItem("carrito");
+            for(let i = 0; i < carrito.length; i++){
+                i--
+                carrito.splice(i,1);
+                console.log("borre 1 vez");
+            }
+            console.log(carrito);
+            document.getElementById("carrito").innerHTML = "";
+            document.getElementById("vacieCarrito").outerHTML = "";
+            calcularPrecioTotal()
+            
+        }
+        precio=0
+        precioEnvio = 0
+        precioTotal = ""
+        document.getElementById("precioFinal").innerHTML = precioTotal;
+        document.getElementById("costoEnvio").innerHTML = precioTotal;
+        document.getElementById("tipoPago").value = "";
+        document.getElementById("envio").value = "";
+    })
+}
 
 
 

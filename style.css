@@ -124,9 +124,12 @@ header img{
 .opciones-compra-form select{
     max-width: max-content;
 }
-
-/* Footer */
-footer h5{
+.opciones-compra-form-pago{
     display: flex;
-    justify-content: center;
+}
+/* Footer */
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
